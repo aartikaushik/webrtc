@@ -14,7 +14,8 @@ app.listen(PORT, function(){
 console.log("listening");
 });
 
-
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 const { Pool } = require('pg');
 const pool = new Pool({

@@ -9,11 +9,12 @@
     <script src="/socket.io/socket.io.js"></script>
  <script>
     var socket = io();
-
-    socket.on('message', function(msg){
-      console.log(msg);
-      document.getElementById("message").innerHTML = msg;
+    socket.emit('chat message', "hello");
+    socket.on('id', function(id){
+      console.log(id);
+      
     });
+
   </script>
     <form>
       <textarea id="incoming"></textarea>

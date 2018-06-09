@@ -1,6 +1,6 @@
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var http = require('http').createServer(app);
+var io = require('socket.io').listen(http);
 
 var PORT = process.env.PORT || 5000
 
@@ -12,20 +12,17 @@ app.get('/', function(req, res){
 
 });
 
-app.listen(PORT, function(){
+http.listen(PORT, function(){
 console.log("listening");
 });
 
 
 
 
-setInterval( function() {
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 
-var msg = Math.random();
-io.emit('message', msg);
-console.log(msg);
-
-}, 1000);
 
 
 app.engine('html', require('ejs').renderFile);

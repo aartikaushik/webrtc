@@ -50,7 +50,7 @@ const pool = new Pool({
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('insert into provide_connection values (2,'hello', unique_id)');
+    const result = await client.query('insert into provide_connection values (2,'hello', 'world')');
     res.send(result.rows);
     client.release();
   } catch (err) {

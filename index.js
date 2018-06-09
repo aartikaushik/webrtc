@@ -41,20 +41,13 @@ app.get('/db', function(req, res){
 var pg = require('pg');
 var conString = process.env.DATABASE_URL;
 
-var client = new pg.Client(conString);
-client.connect();
+const client = await conString.connect()
+const result = await client.query('select * from test_table');
 
-var x = 3;
 
-while (x > 0) {
-    client.query("INSERT INTO test_table values(1,'sfjhs')");
-    
-    x = x - 1;
-}
 
-var query = client.query("SELECT * FROM test_table");
-//fired after last row is emitted
-    res.send(query.rows);
+
+    res.send(result.rows);
     client.release();
 
 });

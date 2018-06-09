@@ -44,22 +44,11 @@ var conString = process.env.DATABASE_URL;
 var client = new pg.Client(conString);
 client.connect();
 
-//queries are queued and executed one after another once the connection becomes available
-var x = 3;
 
-while (x > 0) {
-    client.query("INSERT INTO test_table values(1,'ewfewrrf')");  
-    x = x - 1;
-}
 
 var query = client.query("SELECT * FROM test_table");
 //fired after last row is emitted
+    res.send(query.rows);
+    client.release();
 
-query.on('row', function(row) {
-    console.log(row);
-});
-
-query.on('end', function() {
-    client.end();
-});
 });

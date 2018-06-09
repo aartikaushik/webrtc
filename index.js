@@ -36,18 +36,22 @@ socket.on('chat message', function(msg){
 
 });
 
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
 app.get('/db', function(req, res){
 
-var pg = require('pg');
-var conString = process.env.DATABASE_URL;
-
-const client = await conString.connect()
-const result = await client.query('select * from test_table');
-
-
-
-
+try {
+    const client = await pool.connect()
+    const result = await client.query('select * test_table');
     res.send(result.rows);
     client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 
 });

@@ -37,24 +37,14 @@ socket.on('chat message', function(msg){
 });
 
 
-
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
+var connectionString = "postgres://bymbnvfyrosgvz:1aee5875cdbedd2d8c4fbbb9c1f9b44088f2b36111f9c78090cbf58986e9f8e1@ec2-54-225-107-174.compute-1.amazonaws.com:5432/d3gvoum1kvv887"
+ 
+pg.connect(connectionString, function(err, client, done) {
+   client.query('SELECT * FROM provide_connection', function(err, result) {
+      done();
+      if(err) return console.error(err);
+      console.log(result.rows);
+   });
 });
 
-app.post('/db', async (req, res) => {
-  try {
-    const client = await pool.connect()
-    const result = await client.query('INSERT INTO provide_connection VALUES ( 1, 'dsfd', 'ssfd' )');
-    res.send(result.rows);
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-});
+

@@ -45,6 +45,14 @@ const pool = new Pool({
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
+
+var x = 3;
+
+while (x > 0) {
+    client.query("INSERT INTO test_table values(5,'dsfh')");
+    
+    x = x - 1;
+}
     const result = await client.query('SELECT * FROM test_table');
     res.send(result.rows);
     client.release();

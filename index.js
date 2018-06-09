@@ -34,7 +34,6 @@ socket.on('chat message', function(msg){
     
   });
 
-});
 var pg = require('pg');
 var conString = process.env.DATABASE_URL;
 

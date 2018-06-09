@@ -2,14 +2,14 @@ module.exports = {
   getRecords: function(req, res) { 
 
 const { Pool } = require('pg');
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
-});   
-       
-      
- 
-       try {
+});
+
+
+  try {
     const client = await pool.connect()
     const result = await client.query('select * from test_table');
     res.send(result.rows);
@@ -19,13 +19,9 @@ const pool = new Pool({
     res.send("Error " + err);
   }
 
-  },
-    
 
-    
-    
-     
-    
+
+  }
    
     
 };

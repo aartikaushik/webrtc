@@ -2,7 +2,7 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 var shortid = require('short-id');
- 
+ var dbOperations = require("./dbOperations.js");
 
 var PORT = process.env.PORT || 5000
 
@@ -35,16 +35,8 @@ socket.on('chat message', function(msg){
   });
 
 });
-var pg = require('pg');
-
-
-var connectionString = "postgres://bymbnvfyrosgvz:1aee5875cdbedd2d8c4fbbb9c1f9b44088f2b36111f9c78090cbf58986e9f8e1@ec2-54-225-107-174.compute-1.amazonaws.com:5432/d3gvoum1kvv887"
-
-pg.connect(connectionString, function(err, client, done) {
-   client.query('SELECT * FROM test_table', function(err, result) {
-      done();
-      if(err) return console.error(err);
-      console.log(result.rows);
-   });
+app.get('/db/readRecords', function(req,res){
+    dbOperations.getRecords(req,res);
 });
+
 

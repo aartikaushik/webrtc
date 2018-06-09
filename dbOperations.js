@@ -10,7 +10,7 @@ module.exports = {
         client.connect();
 
         var query = client.query("select * from test_table");
-
+        res.send("hello");
         res.json(query.rows);
         client.release();
         } catch (err) {

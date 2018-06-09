@@ -9,8 +9,7 @@ module.exports = {
         try{
         client.connect();
 
-        var query = client.query("select * from test_table");
-        
+        var query = client.query("select * from provide_connection");
         res.json(query);
         client.release();
         } catch (err) {

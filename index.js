@@ -2,7 +2,7 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 var shortid = require('short-id');
- var dbOperations = require("./dbOperations.js");
+ 
 
 var PORT = process.env.PORT || 5000
 
@@ -35,8 +35,29 @@ socket.on('chat message', function(msg){
   });
 
 });
-app.get('/db/readRecords', function(req,res){
-    dbOperations.getRecords(req,res);
+var pg = require('pg');
+var conString = process.env.DATABASE_URL;
+
+var client = new pg.Client(conString);
+client.connect();
+
+//queries are queued and executed one after another once the connection becomes available
+var x = 3;
+
+while (x > 0) {
+    client.query("INSERT INTO test_table values(1,'ewfewrrf')");
+    
+    x = x - 1;
+}
+
+var query = client.query("SELECT * FROM test_table");
+//fired after last row is emitted
+
+query.on('row', function(row) {
+    console.log(row);
 });
 
+query.on('end', function() {
+    client.end();
+});
 

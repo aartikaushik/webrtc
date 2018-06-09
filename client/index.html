@@ -6,7 +6,15 @@
         word-wrap: break-word;
       }
     </style>
+    <script src="/socket.io/socket.io.js"></script>
+ <script>
+    var socket = io();
 
+    socket.on('message', function(msg){
+      console.log(msg);
+      document.getElementById("message").innerHTML = msg;
+    });
+  </script>
     <form>
       <textarea id="incoming"></textarea>
       <button type="submit">submit</button>
@@ -18,7 +26,9 @@
       <button id="sending">submit</button>
     </form>
   
-    <script src="bundle.js"></script>
+    <!--<script src="bundle.js"></script>-->
+
+  
     
   </body>
 </html>

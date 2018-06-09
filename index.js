@@ -1,18 +1,32 @@
 var app = require('express')();
 var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var PORT = process.env.PORT || 5000
 
 
 
 app.get('/', function(req, res){
 
- res.send("hello world 5");
+ res.sendFile(__dirname + '/index.html');
 
 });
 
 app.listen(PORT, function(){
 console.log("listening");
 });
+
+
+
+
+setInterval( function() {
+
+var msg = Math.random();
+io.emit('message', msg);
+console.log(msg);
+
+}, 1000);
+
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -34,6 +48,5 @@ app.get('/db', async (req, res) => {
     res.send("Error " + err);
   }
 });
-
 
 

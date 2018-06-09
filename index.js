@@ -42,16 +42,14 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/db', function(req, res){
-
-try {
+app.get('/db', async (req, res) => {
+  try {
     const client = await pool.connect()
-    const result = await client.query('select * test_table');
-    res.send(result.rows);
+    const result = await client.query('SELECT * FROM test_table');
+    res.render('pages/db', result);
     client.release();
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
   }
-
 });

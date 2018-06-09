@@ -47,7 +47,7 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/db', async (req, res) => {
+app.post('/db', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query('INSERT INTO provide_connection VALUES ( 1, 'dsfd', 'ssfd' )');

@@ -36,8 +36,6 @@ socket.on('chat message', function(msg){
 
 });
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,

@@ -10,8 +10,8 @@ module.exports = {
         client.connect();
 
         var query = client.query("select * from test_table");
-        res.send("hello");
-        res.json(query.rows);
+        
+        res.json(query);
         client.release();
         } catch (err) {
     console.error(err);

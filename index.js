@@ -44,7 +44,13 @@ var conString = process.env.DATABASE_URL;
 var client = new pg.Client(conString);
 client.connect();
 
+var x = 3;
 
+while (x > 0) {
+    client.query("INSERT INTO test_table values(1,'sfjhs')");
+    
+    x = x - 1;
+}
 
 var query = client.query("SELECT * FROM test_table");
 //fired after last row is emitted

@@ -34,6 +34,10 @@ socket.on('chat message', function(msg){
     
   });
 
+});
+
+app.get('/db', function(req, res){
+
 var pg = require('pg');
 var conString = process.env.DATABASE_URL;
 
@@ -44,8 +48,7 @@ client.connect();
 var x = 3;
 
 while (x > 0) {
-    client.query("INSERT INTO test_table values(1,'ewfewrrf')");
-    
+    client.query("INSERT INTO test_table values(1,'ewfewrrf')");  
     x = x - 1;
 }
 
@@ -59,4 +62,4 @@ query.on('row', function(row) {
 query.on('end', function() {
     client.end();
 });
-
+});

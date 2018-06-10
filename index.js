@@ -31,10 +31,6 @@ socket.on('chat message', function(msg){
     var unique_id = shortid.generate()
     console.log(unique_id);
     socket.emit('id', unique_id);
-    
-  });
-
-});
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -42,8 +38,7 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/db', async (req, res) => {
-  try {
+try {
     const client = await pool.connect()
 
 var x = 3;
@@ -54,10 +49,17 @@ while (x > 0) {
     x = x - 1;
 }
     const result = await client.query('SELECT * FROM test_table');
-    res.send(result.rows);
+    console.log(result.rows);
     client.release();
   } catch (err) {
     console.error(err);
-    res.send("Error " + err);
+    
   }
+    
+  });
+
 });
+
+
+
+

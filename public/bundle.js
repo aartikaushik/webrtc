@@ -1,4 +1,7 @@
-var socket = io.connect('http://localhost:5000');
+var socket = io();
+
+
+
     socket.emit('chat message', "hello");
     socket.on('id', function(id){
       console.log(id);    

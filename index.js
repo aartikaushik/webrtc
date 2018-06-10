@@ -1,4 +1,6 @@
-var app = require('express')();
+var express = require('express');
+var app= express();
+
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 var shortid = require('short-id');
@@ -8,16 +10,12 @@ var PORT = process.env.PORT || 5000
 
 
 
-app.get('/', function(req, res){
-
- res.sendFile(__dirname + '/client/index.html');
-
-});
 
 http.listen(PORT, function(){
 console.log("listening");
 });
 
+app.use(express.static('public'));
 
 io.on('connection', function(socket){
   
@@ -36,27 +34,4 @@ socket.on('chat message', function(msg){
 
 });
 
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
 
-app.get('/db', async (req, res) => {
-  try {
-    const client = await pool.connect()
-var x = 3;
-
-while (x > 0) {
-    client.query("INSERT INTO test_table values(7,'hfyuhvu')");
-    
-    x = x - 1;
-}
-    const result = await client.query('SELECT * FROM test_table');
-    res.send(result.rows)
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-});

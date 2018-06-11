@@ -7,7 +7,7 @@ var socket = io();
     });
 
 var Peer = require('simple-peer')
-var p = new Peer({ initiator: location.hash === '#1', trickle: false })
+var p = new Peer({ initiator: true , trickle: false })
 
 p.on('error', function (err) { console.log('error', err) })
 

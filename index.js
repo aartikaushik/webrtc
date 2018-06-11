@@ -46,7 +46,7 @@ function db_insert(msg,unique_id) {
 	var x = 3;
 
 	while (x > 0) {
-	    client.query("INSERT INTO test_table values($1, $2)", [1, unique_id]);
+	    client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, unique_id, msg]);
 	  
 	    x = x - 1;
 	}

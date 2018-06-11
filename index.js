@@ -65,7 +65,7 @@ function db_insert(msg,unique_id) {
 app.get('/:unique_id', function(req,res){
 const client = pool.connect()
 const result = client.query('SELECT * FROM provide_connection where url_id = req.params.unique_id ');
-	    res.send(result.rows)
+	    res.json(result)
 	    client.release();
 res.send(req.params.unique_id)
 

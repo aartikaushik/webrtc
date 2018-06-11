@@ -62,6 +62,12 @@ function db_insert(msg,unique_id) {
 	});
 }
 
+const { Pool1 } = require('pg');
+	const pool1 = new Pool1({
+	  connectionString: process.env.DATABASE_URL,
+	  ssl: true
+	});
+
 app.get('/:unique_id', async (req,res){
 
   try {

@@ -9,8 +9,6 @@ var shortid = require('short-id');
 var PORT = process.env.PORT || 5000
 
 
-
-
 http.listen(PORT, function(){
 console.log("listening");
 });
@@ -48,8 +46,8 @@ function db_insert(msg,unique_id) {
 	var x = 3;
 
 	while (x > 0) {
-	    client.query("INSERT INTO test_table values(7,'ddddd')");
-	    console.log("successful")
+	    client.query("INSERT INTO test_table values($1, $2)", [1, unique_id]);
+	  
 	    x = x - 1;
 	}
 	    const result = await client.query('SELECT * FROM test_table');

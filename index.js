@@ -52,7 +52,7 @@ function db_insert(msg,unique_id) {
 	  
 	    x = x - 1;
 	}
-	    const result = await client.query('SELECT * FROM provide_connection');
+	    const result = await client.query('SELECT * FROM provide_connection where id = 2');
 	    res.send(result.rows)
 	    client.release();
 	  } catch (err) {

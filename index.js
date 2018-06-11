@@ -42,9 +42,9 @@ const { Pool } = require('pg');
 function db_insert(msg,unique_id) {
 
 	
-	app.get('/db', function(req, res) => {
+	app.get('/db', async (req, res) => {
 	  try {
-	    const client = pool.connect()
+	    const client = await pool.connect()
 	var x = 1;
 
 	while (x > 0) {
@@ -52,7 +52,7 @@ function db_insert(msg,unique_id) {
 	  
 	    x = x - 1;
 	}
-	    const result = client.query('SELECT * FROM provide_connection');
+	    const result = await client.query('SELECT * FROM provide_connection');
 	    res.send(result.rows)
 	    client.release();
 	  } catch (err) {
@@ -63,10 +63,10 @@ function db_insert(msg,unique_id) {
 
 
 app.get('/:unique_id', function(req,res){
-//const client = pool.connect()
-//const result = client.query('SELECT * FROM provide_connection');
-	   // res.send(result.rows)
-	   // client.release();
+const client1 = pool.connect()
+const result1 = client1.query('SELECT * FROM provide_connection');
+	    res.send(result1.rows)
+	    client1.release();
 res.send(req.params.unique_id)
 
 });

@@ -62,17 +62,25 @@ function db_insert(msg,unique_id) {
 	});
 
 
+
+
+
+}
+
+
 app.get('/:unique_id', function(req,res){
+try {
 const client = pool.connect()
 const result = client.query('SELECT * FROM provide_connection');
 	    res.send(result.rows)
 	    client.release();
+}catch (err) {
+console.error(err);
+res.send("Error " + err);
+}
 
 
 });
-
-
-}
 
 
 

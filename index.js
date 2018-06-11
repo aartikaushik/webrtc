@@ -45,7 +45,7 @@ function db_insert(msg,unique_id) {
 	app.get('/db', async (req, res) => {
 	  try {
 	    const client = await pool.connect()
-	var x = 3;
+	var x = 1;
 
 	while (x > 0) {
 	    client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);

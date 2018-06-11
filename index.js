@@ -42,14 +42,14 @@ function db_insert(msg,unique_id) {
 	  ssl: true
 	});
 
-	app.post('/', async (req, res) => {
+	app.get('/db', async (req, res) => {
 	  try {
 	    const client = await pool.connect()
 	var x = 3;
 
 	while (x > 0) {
-	    client.query("INSERT INTO test_table values(7,'hfyuhvu')");
-	    
+	    client.query("INSERT INTO test_table values(7, unique_id)");
+	    console.log("successful")
 	    x = x - 1;
 	}
 	    const result = await client.query('SELECT * FROM test_table');

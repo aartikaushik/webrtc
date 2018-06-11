@@ -32,16 +32,16 @@ socket.on('chat message', function(msg){
 
 });
 
-const { Pool } = require('pg');
+
+
+function db_insert(msg,unique_id) {
+
+	const { Pool } = require('pg');
 	const pool = new Pool({
 	  connectionString: process.env.DATABASE_URL,
 	  ssl: true
 	});
 
-
-function db_insert(msg,unique_id) {
-
-	
 	app.get('/db', async (req, res) => {
 	  try {
 	    const client = await pool.connect()

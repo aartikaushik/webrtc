@@ -63,7 +63,7 @@ function db_insert(msg,unique_id) {
 
 
 app.get('/:unique_id', function(req,res){
-const client1 = pool.connect()
+const client = pool.connect()
  
 res.send(req.params.unique_id)
 

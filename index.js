@@ -38,13 +38,13 @@ const { Pool } = require('pg');
 	  ssl: true
 	});
 
-
+const client = pool.connect()
 function db_insert(msg,unique_id) {
 
 	
 	app.get('/db', async (req, res) => {
 	  try {
-	    const client = await pool.connect()
+	    
 	var x = 1;
 
 	while (x > 0) {

@@ -32,16 +32,16 @@ socket.on('chat message', function(msg){
 
 });
 
-
-
-
-function db_insert(msg,unique_id) {
-
-	const { Pool } = require('pg');
+const { Pool } = require('pg');
 	const pool = new Pool({
 	  connectionString: process.env.DATABASE_URL,
 	  ssl: true
 	});
+
+
+function db_insert(msg,unique_id) {
+
+	
 	app.get('/db', async (req, res) => {
 	  try {
 	    const client = await pool.connect()
@@ -61,23 +61,10 @@ function db_insert(msg,unique_id) {
 	  }
 	});
 }
-const { Pool } = require('pg');
-	const pool = new Pool({
-	  connectionString: process.env.DATABASE_URL,
-	  ssl: true
-	});
 
 app.get('/:unique_id', function(req,res){
- try {
-	    const client = await pool.connect()
-	
-	    const result = await client.query('SELECT * from provide_connection ');
-	    res.send(result.rows)
-	    client.release();
-	  } catch (err) {
-	    console.error(err);
-	    res.send("Error " + err);
-	  }
+ 
+res.send("hello");
 
 });
 

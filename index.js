@@ -64,7 +64,7 @@ function db_insert(msg,unique_id) {
 
 app.get('/:unique_id', function(req,res){
  
-res.send(req.params)
+res.send(req.params.unique_id)
 
 });
 

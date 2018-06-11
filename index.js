@@ -29,9 +29,37 @@ socket.on('chat message', function(msg){
     var unique_id = shortid.generate()
     console.log(unique_id);
     socket.emit('id', unique_id);
-    
+    db_insert(msg,unique_id)
   });
 
 });
+
+function db_insert(msg,unique_id) {
+
+	const { Pool } = require('pg');
+	const pool = new Pool({
+	  connectionString: process.env.DATABASE_URL,
+	  ssl: true
+	});
+
+	app.post('/', async (req, res) => {
+	  try {
+	    const client = await pool.connect()
+	var x = 3;
+
+	while (x > 0) {
+	    client.query("INSERT INTO test_table values(7,'hfyuhvu')");
+	    
+	    x = x - 1;
+	}
+	    const result = await client.query('SELECT * FROM test_table');
+	    res.send(result.rows)
+	    client.release();
+	  } catch (err) {
+	    console.error(err);
+	    res.send("Error " + err);
+	  }
+	});
+}
 
 

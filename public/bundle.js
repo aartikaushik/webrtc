@@ -1,11 +1,6 @@
 
+
 var socket = io();
-
-    socket.emit('chat message', "hello");
-    socket.on('id', function(id){
-      console.log(id);    
-    });
-
 var Peer = require('simple-peer')
 var p = new Peer({ initiator: true , trickle: false })
 
@@ -14,6 +9,12 @@ p.on('error', function (err) { console.log('error', err) })
 p.on('signal', function (data) {
   console.log('SIGNAL', JSON.stringify(data))
   document.querySelector('#outgoing').textContent = JSON.stringify(data)
+   
+
+    socket.emit('chat message', JSON.stringify(data));
+    socket.on('id', function(id){
+      console.log(id);    
+    });
 })
 
 document.querySelector('form').addEventListener('submit', function (ev) {

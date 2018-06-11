@@ -11,24 +11,6 @@ http.listen(PORT, function(){
 });
 
 app.use(express.static('public'));
-
-io.on('connection', function(socket){
-	console.log('a user connected');
-
-	socket.on('disconnect', function(){
-		console.log('user disconnected');
-	});
-
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
-		var unique_id = shortid.generate()
-		console.log(unique_id);
-		socket.emit('id', unique_id);
-		db_insert(msg,unique_id)
-	});
-
-});
-
 const { Pool } = require('pg');
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
@@ -55,6 +37,25 @@ function db_insert(msg,unique_id) {
 	}
 	});
 }
+
+io.on('connection', function(socket){
+	console.log('a user connected');
+
+	socket.on('disconnect', function(){
+		console.log('user disconnected');
+	});
+
+	socket.on('chat message', function(msg){
+		console.log('message: ' + msg);
+		var unique_id = shortid.generate()
+		console.log(unique_id);
+		socket.emit('id', unique_id);
+		db_insert(msg,unique_id)
+	});
+
+});
+
+
 
 
 app.get('/:unique_id', function(req,res){

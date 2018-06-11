@@ -35,13 +35,13 @@ const pool = new Pool({
 	ssl: true
 	});
 
-const client = pool.connect()   
+   
 
 function db_insert(msg,unique_id) {
 	app.get('/:uni_id', async (req, res) => {
 	try {
-		
-		const result = await client.query('SELECT * FROM provide_connection where url_id = req.params.uni_id');
+		const client = await pool.connect()
+		const result = await client.query('SELECT * FROM provide_connection');
 		res.send(result.rows)
 		client.release();
 

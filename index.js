@@ -38,17 +38,17 @@ const { Pool } = require('pg');
 	  ssl: true
 	});
 
-
+const client = await pool.connect()
 function db_insert(msg,unique_id) {
 
 	
 	app.get('/db', async (req, res) => {
 	  try {
-	    const client = await pool.connect()
+	    
 	var x = 3;
 
 	while (x > 0) {
-	    client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
+	    client.query("INSERT INTO provide_connection values($1, $2, $3)", [5, msg, unique_id]);
 	  
 	    x = x - 1;
 	}
@@ -64,17 +64,8 @@ function db_insert(msg,unique_id) {
 
 app.get('/:unique_id', async (req,res){
 
- try {
-	    const client = await pool.connect()
-	
-	    const result = await client.query('SELECT * FROM provide_connection');
-	    res.send(result.rows)
-	    client.release();
-	  } catch (err) {
-	    console.error(err);
-	    res.send("Error " + err);
-	  }
- //res.send(req.params.unique_id)
+ 
+ res.send(req.params.unique_id)
 
 });
 

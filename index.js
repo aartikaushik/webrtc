@@ -32,8 +32,8 @@ socket.on('chat message', function(msg){
 
 });
 
-const { Pool } = require('pg');
-	const pool = new Pool({
+var { Pool } = require('pg');
+	var pool = new Pool({
 	  connectionString: process.env.DATABASE_URL,
 	  ssl: true
 	});
@@ -44,7 +44,7 @@ function db_insert(msg,unique_id) {
 	
 	app.get('/db', async (req, res) => {
 	  try {
-	const client = await pool.connect()   
+	var client = await pool.connect()   
 	var x = 3;
 
 	while (x > 0) {
@@ -62,25 +62,11 @@ function db_insert(msg,unique_id) {
 	});
 }
 
-const { Pool1 } = require('pg');
-	const pool1 = new Pool1({
-	  connectionString: process.env.DATABASE_URL,
-	  ssl: true
-	});
 
 app.get('/:unique_id', async (req,res){
 
-  try {
-	const client1 = await pool.connect()   
-	
-	    const result1 = await client1.query('SELECT * FROM provide_connection');
-	    res.send(result1.rows)
-	    client1.release();
-	  } catch (err) {
-	    console.error(err);
-	    res.send("Error " + err);
-	  }
-// res.send(req.params.unique_id)
+  
+ res.send(req.params.unique_id)
 
 });
 

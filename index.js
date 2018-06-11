@@ -38,7 +38,7 @@ const pool = new Pool({
    
 
 function db_insert(msg,unique_id) {
-app.get('/db', async (req, res) => {
+app.get('/', async (req, res) => {
 	try {
 		const client = await pool.connect()
 		var x = 2;

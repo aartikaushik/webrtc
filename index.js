@@ -62,9 +62,19 @@ function db_insert(msg,unique_id) {
 	});
 }
 
-app.get('/:unique_id', function(req,res){
- 
-res.send(req.params.unique_id)
+app.get('/:unique_id', async (req,res){
+
+ try {
+	    const client = await pool.connect()
+	
+	    const result = await client.query('SELECT * FROM provide_connection');
+	    res.send(result.rows)
+	    client.release();
+	  } catch (err) {
+	    console.error(err);
+	    res.send("Error " + err);
+	  }
+ //res.send(req.params.unique_id)
 
 });
 

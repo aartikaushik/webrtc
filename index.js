@@ -37,19 +37,27 @@ const pool = new Pool({
 
 const client = pool.connect()   
 
-function db_insert(msg,unique_id) {
-	app.get('/db', async (req, res) => {
-	try {
-		var x = 2;
-		while (x > 0) {
-			client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
-			x = x - 1;
-		}
-		const result = await client.query('SELECT * FROM provide_connection');
-		res.send(result.rows)
-		client.release();
+//function db_insert(msg,unique_id) {
+//	app.get('/db', async (req, res) => {
+//	try {
+	//	var x = 2;
+	//	while (x > 0) {
+	//		client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
+	//		x = x - 1;
+	//	}
+	//	const result = await client.query('SELECT * FROM provide_connection');
+	//	res.send(result.rows)
+	//	client.release();
+//
+//
+//	} 
+//	catch (err) {
+//		console.error(err);
+//		res.send("Error " + err);
+//	}
+//	});
 
-	app.get('/:unique_id', function(req,res){
+app.get('/:unique_id', async (req,res){
 	
 
 		const result = await client.query('SELECT * FROM provide_connection where url_id = req.params.unique_id');
@@ -58,14 +66,6 @@ function db_insert(msg,unique_id) {
 	
 	
 
-	});
-
-
-	} 
-	catch (err) {
-		console.error(err);
-		res.send("Error " + err);
-	}
 	});
 }
 

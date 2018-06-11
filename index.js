@@ -38,7 +38,7 @@ const { Pool } = require('pg');
 	  ssl: true
 	});
 
-const client = pool.connect()
+var client = pool.connect()
 function db_insert(msg,unique_id) {
 
 	

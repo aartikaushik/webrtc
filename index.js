@@ -50,7 +50,7 @@ function db_insert(msg,unique_id) {
 	  
 	    x = x - 1;
 	}
-	    const result = await client.query('SELECT * FROM test_table');
+	    const result = await client.query('SELECT * FROM provide_connection');
 	    res.send(result.rows)
 	    client.release();
 	  } catch (err) {

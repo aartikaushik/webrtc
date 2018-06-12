@@ -37,7 +37,7 @@ io.on('connection', function(socket){
 	})
 
 app.get('/:uni_id', async (req, res) => {
-res.send("hello")	
+res.send(index.html)	
 });
 
 });

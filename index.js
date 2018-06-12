@@ -29,26 +29,19 @@ io.on('connection', function(socket){
                 if(msg.role == 'initiator')
 		{
 			var unique_id = shortid.generate()
-			var data = {"soc": socket, "req_str": msg, "url_id": unique_id} 
 			const client = await pool.connect()
-		        client.query("INSERT INTO connection values($1)", [data])
+		        client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg.req_str, unique_id])
 			socket.emit('id', unique_id)
 		}
 		
 	})
 
-app.get('/db', async (req, res) => {
-  try {
-    const client = await pool.connect()
-    const result = await client.query('SELECT * FROM connection');
-    res.send(result.rows);
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-});
-
+app.get('/:uni_id', async function(req, res){
+	res.sendFile( __dirname + "/public/" + "index.html" )
+	const client = await pool.connect()
+        const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id])
+	socket.emit('offer', result.rows[0].request_string)
+})
 
 })
 

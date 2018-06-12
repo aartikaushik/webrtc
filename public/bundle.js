@@ -1,5 +1,8 @@
 var socket = io();
 var Peer = require('simple-peer')
+
+var lastPart = window.location.href.split("/").pop();
+console.log(lastPart);
 var p = new Peer({ initiator: true , trickle: false })
 
 p.on('error', function (err) { console.log('error', err) })

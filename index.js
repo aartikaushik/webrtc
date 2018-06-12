@@ -38,6 +38,7 @@ io.on('connection', function(socket){
 
 app.get('/:uni_id', function(req, res){
 res.sendFile( __dirname + "/public/" + "index.html" );
+
 });
 
 });

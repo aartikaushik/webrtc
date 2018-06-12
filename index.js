@@ -39,7 +39,7 @@ io.on('connection', function(socket){
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM provide_connection where url_id = c71889 ');
+    const result = await client.query('SELECT * FROM provide_connection');
     res.send(result.rows)
     client.release();
   } catch (err) {

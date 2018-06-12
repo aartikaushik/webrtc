@@ -43,7 +43,8 @@ app.get('/:uni_id', async (req, res) => {
                 client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
 		const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id]);
 		res.json(result)
-		//var user = result[0].userid;
+		var user = result[0].request_string;
+		res.send(user)
 		client.release();
 	} 
 	catch (err) {

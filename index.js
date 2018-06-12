@@ -29,10 +29,11 @@ io.on('connection', function(socket){
                 if(msg.role == 'initiator')
 		{
 			var unique_id = shortid.generate()
-			socket.emit('id', unique_id)
+			
 			const client = await pool.connect()
-			var data = {"soc": socket, "req_str": msg, "url_id" : unique_id} 
+			var data = {"req_str": msg, "url_id" : unique_id} 
 		        client.query("INSERT INTO connection values($1)", [data])
+  			socket.emit('id', unique_id)
 			
 		}
 		

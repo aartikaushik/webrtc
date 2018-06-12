@@ -30,7 +30,7 @@ io.on('connection', function(socket){
 		{
 			var unique_id = shortid.generate()
 			const client = await pool.connect()
-		        client.query("INSERT INTO peer_connection values($1,$2)", [msg,unique_id])
+		        client.query("INSERT INTO provide_connection values($1,$2)", [msg,unique_id])
   			socket.emit('id', unique_id)
 			
 		}
@@ -39,7 +39,7 @@ io.on('connection', function(socket){
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM peer_connection');
+    const result = await client.query('SELECT * FROM provide_connection');
     res.send(result.rows)
     client.release();
   } catch (err) {

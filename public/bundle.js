@@ -12,17 +12,16 @@ p.on('signal', function (data) {
     socket.on('id', function(id){
       console.log(id);    
     });
-    socket.on('req_str', function(req_str){
+    
+})
+answer(ev);
+function answer(ev) {
+socket.on('req_str', function(req_str){
       console.log(req_str);
     });
-})
-
-
-
-document.querySelector('form').addEventListener('submit', function (ev) {
   ev.preventDefault()
-  p.signal(JSON.parse(document.querySelector('#incoming').value))
-})
+  p.signal(JSON.parse(req_str))
+}
 
 p.on('connect', function () {
   console.log('CONNECT')

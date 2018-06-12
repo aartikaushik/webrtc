@@ -38,8 +38,9 @@ io.on('connection', function(socket){
 
 app.get('/:uni_id', async function(req, res){
 	res.sendFile( __dirname + "/public/" + "index.html" )
-	var test = '643152'
-	socket.emit('offer', test )
+	const client = await pool.connect()
+        const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id])
+	socket.emit('offer', result.rows[0].request_string)
 })
 
 })

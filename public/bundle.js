@@ -1,6 +1,12 @@
 var socket = io();
 var Peer = require('simple-peer')
 
+  var socket = io();
+  socket.on('connect', function(){
+var id = socket.io.engine.id;
+  console.log(id);
+})
+
 var lastPart = window.location.href.split("/").pop();
 if(lastPart != '')
 {

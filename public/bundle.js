@@ -7,7 +7,6 @@ p.on('error', function (err) { console.log('error', err) })
 p.on('signal', function (data) {
   console.log('SIGNAL', JSON.stringify(data))
     var role_and_string = {"role": 'initiator', "req_str": JSON.stringify(data)} 
-    console.log(role_and_string.role); 
     socket.emit('request string', role_and_string);
     socket.on('id', function(id){
       console.log(id);    

@@ -25,11 +25,14 @@ io.on('connection', function(socket){
 		console.log('user disconnected')
 	})
 
-	socket.on('request string', function(msg){
-                
-		var unique_id = shortid.generate()
-		
-		socket.emit('id', unique_id)
+	socket.on('request string', async function(msg){
+                if(msg.role == 'initiator')
+		{
+			var unique_id = shortid.generate()
+			const client = await pool.connect()
+		        client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg.req_str, unique_id])
+			socket.emit('id', unique_id)
+		}
 		
 	})
 

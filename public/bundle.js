@@ -1,29 +1,25 @@
 var socket = io();
 var Peer = require('simple-peer')
-var p = new Peer({ initiator: location.hash === '#1', trickle: false })
+var p = new Peer({ initiator: true })
 
 p.on('error', function (err) { console.log('error', err) })
 
 p.on('signal', function (data) {
   console.log('SIGNAL', JSON.stringify(data))
-  document.querySelector('#outgoing').textContent = JSON.stringify(data)
-   
-    socket.emit('chat message', JSON.stringify(data));
+    var role_and_string = {"role": 'initiator', "req_str": JSON.stringify(data)}  
+    socket.emit('request string', role_and_string);
     socket.on('id', function(id){
       console.log(id);    
     });
     
 })
 
-socket.on('req_str', function(req_str){
+document.querySelector('form').addEventListener('submit', function (ev) {
+  ev.preventDefault()
+  p.signal(JSON.parse(document.querySelector('#incoming').value))
+})
 
     
-  p.signal(JSON.parse(req_str))
-
-    });
-    
-
-
 p.on('connect', function () {
   console.log('CONNECT')
 
@@ -34,8 +30,6 @@ document.getElementById("sending").addEventListener("click", function () {
   p.send(document.querySelector('#type_chat').value)
   document.getElementById("type_chat").value = "";
 })
-
-
 
 p.on('data', function (data) {
 

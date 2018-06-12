@@ -36,9 +36,18 @@ io.on('connection', function(socket){
 		
 	})
 
-app.get('/:uni_id', async (req, res) => {
-res.send("hello")	
+app.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query('SELECT * FROM provide_connection where url_id = $1', [c71889]);
+    res.send(result.rows)
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
+
 
 });
 

@@ -8,6 +8,7 @@ if(lastPart != '')
 	socket.on('offer', function(str){
       	console.log(str);    
     	});
+        console.log("cscvsdfs")
 }
 else
 {

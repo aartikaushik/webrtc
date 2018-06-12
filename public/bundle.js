@@ -12,13 +12,15 @@ p.on('signal', function (data) {
     socket.on('id', function(id){
       console.log(id);    
     });
+    socket.on('req str', function(req_str){
+      answer(req_str);
+    });
     
 })
-answer();
-function answer() {
-socket.on('req str', function(req_str){
-      console.log(req_str);
-    });
+
+
+function answer(req_str) {
+
   //ev.preventDefault()
   p.signal(JSON.parse(req_str))
 }

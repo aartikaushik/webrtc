@@ -5,16 +5,16 @@ var lastPart = window.location.href.split("/").pop();
 if(lastPart != '')
 {
 	var p = new Peer({ initiator: false , trickle: false })
-	socket.on('offer', function(str){
-      	console.log(str);    
-    	});
-        console.log("cscvsdfs")
+	
 }
 else
 {
 	var p = new Peer({ initiator: true , trickle: false })
 }
-
+socket.on('offer', function(str){
+      	console.log(str);    
+    	});
+        
 p.on('error', function (err) { console.log('error', err) })
 
 p.on('signal', function (data) {

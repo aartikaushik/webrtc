@@ -30,7 +30,7 @@ io.on('connection', function(socket){
 		{
 			var unique_id = shortid.generate()
 			const client = await pool.connect()
-		        client.query("INSERT INTO peer_connection values($1,$2,$3)", [socket,msg,unique_id])
+		        client.query("INSERT INTO peer_connection values($1,$2)", [msg,unique_id])
   			socket.emit('id', unique_id)
 			
 		}

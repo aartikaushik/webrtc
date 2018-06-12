@@ -27,7 +27,7 @@ io.on('connection', function(socket){
 		db_insert(msg,unique_id)
 	});
 
-});
+
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -55,7 +55,7 @@ app.get('/:uni_id', async (req, res) => {
 
 
 
-
+});
 
 
 

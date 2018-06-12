@@ -14,12 +14,12 @@ p.on('signal', function (data) {
     });
     
 })
-answer(ev);
-function answer(ev) {
+answer();
+function answer() {
 socket.on('req_str', function(req_str){
       console.log(req_str);
     });
-  ev.preventDefault()
+  //ev.preventDefault()
   p.signal(JSON.parse(req_str))
 }
 

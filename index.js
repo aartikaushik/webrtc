@@ -41,7 +41,7 @@ app.get('/:uni_id', async function(req, res){
 	const client = await pool.connect()
         const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id])
 	var test = 'fdgdsh';
-        socket.broadcast.emit('offer', test)
+        socket.emit('offer', test)
 })
 
 })

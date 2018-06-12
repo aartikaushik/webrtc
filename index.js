@@ -33,23 +33,14 @@ const { Pool } = require('pg');
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 	ssl: true
-	});
-
-   
+});
 
 function db_insert(msg,unique_id) {
 app.post('/', async (req, res) => {
 	try {
 		const client = await pool.connect()
-		var x = 2;
-		while (x > 0) {
-			client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
-			x = x - 1;
-		}
-		
+		client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);	
 		client.release();
-
-
 	} 
 	catch (err) {
 		console.error(err);
@@ -59,23 +50,19 @@ app.post('/', async (req, res) => {
 
 }
 
-
-
-
 app.get('/:uni_id', async (req, res) => {
 	try {
 		const client = await pool.connect()
+                client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
 		const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id]);
 		res.send(result.rows)
 		client.release();
-
-
 	} 
 	catch (err) {
 		console.error(err);
 		res.send("Error " + err);
 	}
-	});
+});
 
 
 

@@ -36,19 +36,6 @@ const pool = new Pool({
 });
 
 function db_insert(msg,unique_id) {
-app.post('/', async (req, res) => {
-	try {
-		const client = await pool.connect()
-		client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);	
-		client.release();
-	} 
-	catch (err) {
-		console.error(err);
-		res.send("Error " + err);
-	}
-	});	
-
-}
 
 app.get('/:uni_id', async (req, res) => {
 	try {
@@ -65,6 +52,10 @@ app.get('/:uni_id', async (req, res) => {
 });
 
 
+
+
+
+}
 
 
 

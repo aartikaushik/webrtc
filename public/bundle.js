@@ -1,6 +1,6 @@
 var socket = io();
 var Peer = require('simple-peer')
-var p = new Peer({ initiator: true })
+var p = new Peer({ initiator: true , trickle: false })
 
 p.on('error', function (err) { console.log('error', err) })
 

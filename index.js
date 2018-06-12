@@ -36,7 +36,7 @@ io.on('connection', function(socket){
 		
 	})
 
-app.get('/:uni_id', function (req, res) => {
+app.get('/:uni_id', function(req, res){
 res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
 

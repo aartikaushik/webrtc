@@ -15,8 +15,8 @@ p.on('signal', function (data) {
     
 })
 
-socket.on('req str', function(req_str){
-document.getElementById("incoming").innerHTML = req_str
+socket.on('req_str', function(req_str){
+document.getElementById("incoming").innerHTML = req_str; 
      document.querySelector('form').addEventListener('submit', function (ev) {
   ev.preventDefault()
   p.signal(JSON.parse(document.querySelector('#incoming').value))

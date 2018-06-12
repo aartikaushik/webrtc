@@ -29,10 +29,8 @@ io.on('connection', function(socket){
                 if(msg.role == 'initiator')
 		{
 			var unique_id = shortid.generate()
-			
 			const client = await pool.connect()
-			var data = {"req_str": msg, "url_id" : unique_id} 
-		        client.query("INSERT INTO connection values($1)", [data])
+		        client.query("INSERT INTO peer_connection values($1,$2,$3)", [socket,msg,unique_id])
   			socket.emit('id', unique_id)
 			
 		}
@@ -41,7 +39,7 @@ io.on('connection', function(socket){
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM connection');
+    const result = await client.query('SELECT * FROM peer_connection');
     res.send(result.rows)
     client.release();
   } catch (err) {

@@ -5,9 +5,7 @@ var lastPart = window.location.href.split("/").pop();
 if(lastPart != '')
 {
 	var p = new Peer({ initiator: false , trickle: false })
-	socket.on('offer', function(str){
-      	console.log(str);    
-    	});
+	
 }
 else
 {

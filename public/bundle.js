@@ -16,7 +16,7 @@ p.on('signal', function (data) {
 })
 answer();
 function answer() {
-socket.on('req_str', function(req_str){
+socket.on('req str', function(req_str){
       console.log(req_str);
     });
   //ev.preventDefault()

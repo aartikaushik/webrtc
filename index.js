@@ -42,7 +42,7 @@ app.get('/:uni_id', async (req, res) => {
 		const client = await pool.connect()
                 client.query("INSERT INTO provide_connection values($1, $2, $3)", [1, msg, unique_id]);
 		const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id]);
-		res.send(result.rows)
+		res.send(result.rows.request_string)
 		client.release();
 	} 
 	catch (err) {

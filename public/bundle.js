@@ -7,7 +7,8 @@ if(lastPart != '')
 	var p = new Peer({ initiator: false })
 	socket.emit('greeting', "hello")
 	socket.on('offer', function(offer){
-	      console.log(offer);    
+	      console.log(offer);
+              console.log("aagya")    
         });
 	console.log("sgaf")
 	

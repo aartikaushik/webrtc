@@ -5,12 +5,7 @@ var lastPart = window.location.href.split("/").pop();
 if(lastPart != '')
 {
 	var p = new Peer({ initiator: false })
-	socket.emit('greeting', 'hello')
-	socket.on('offer', function(offer){
-	      console.log(offer);
-              console.log("aagya")    
-        });
-	console.log("sgaf")
+	
 	
 	
 }
@@ -19,7 +14,13 @@ else
 	var p = new Peer({ initiator: true , trickle: false })
 }
 
-        
+socket.emit('greeting', 'hello')
+	socket.on('offer', function(offer){
+	      console.log(offer);
+              console.log("aagya")    
+        });
+	
+     
 p.on('error', function (err) { console.log('error', err) })
 
 p.on('signal', function (data) {

@@ -9,6 +9,7 @@ if(lastPart != '')
 	socket.on('offer', function(offer){
 	      console.log(offer);    
         });
+	console.log("sgaf")
 	
 	
 }

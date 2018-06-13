@@ -36,18 +36,15 @@ io.on('connection', function(socket){
 		}
 		
 	})
-app.get('/db', async (req, res) => {
-  try {
-    const client = await pool.connect()
-    const result = await client.query('SELECT * FROM provide_connection');
-    res.send(result.rows)
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-});
 
+app.get('/:uni_id', async function(req, res){
+	res.sendFile( __dirname + "/public/" + "index.html" )
+	const client = await pool.connect()
+        const result = await client.query('SELECT request_string FROM provide_connection where url_id = $1', [req.params.uni_id])
+	socket.on('greeting', function(greet_msg){
+		socket.emit('offer', result.rows[0].request_string)
+	})
+})
 
 })
 

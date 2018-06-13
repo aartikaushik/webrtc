@@ -4,7 +4,12 @@ var Peer = require('simple-peer')
 var lastPart = window.location.href.split("/").pop();
 if(lastPart != '')
 {
-	var p = new Peer({ initiator: false , trickle: false })
+	var p = new Peer({ initiator: false })
+	socket.emit('greeting', "hello")
+	socket.on('offer', function(offer){
+	      console.log(offer);    
+        });
+	
 	
 }
 else

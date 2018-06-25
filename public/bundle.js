@@ -26,7 +26,7 @@ else
 		socket.on('id', function(id){
 		    var text_div = document.createElement("div")
 		    text_div.className = 'share_url'
-		    text_div.innerHTML = "Share this URL with whom you want to chat : localhost:5000/" + id 
+		    text_div.innerHTML = "Share this URL with whom you want to chat : radiant-basin-26448.herokuapp.com/" + id 
 		    document.getElementById("fullpage").appendChild(text_div) 
 		})   
 	})

@@ -30,31 +30,43 @@ io.on('connection', function(socket){
 	socket.on('receiver welcome', function(greeting){
 		if(greeting.role == 'receiver')
 		{
-			
 			var data_len = data.length;
 			for (var i = 0; i < data_len; i++) {
-				if(data[i].url_id == greeting.url_id)
-				{
-					data[i].receiver_socket = socket
-					var rec_soc = data[i].receiver_socket
-					var ini_text = data[i].initiator_text.req_str
-					break
- 				}  
+                             if(data[i] != undefined) {
+					if(data[i].url_id == greeting.url_id)
+					{
+						data[i].receiver_socket = socket
+						var rec_soc = data[i].receiver_socket
+						var ini_text = data[i].initiator_text.req_str
+						break
+					}  
+			     }
 			}
-		rec_soc.emit('initiator text', ini_text)
+			rec_soc.emit('initiator text', ini_text)
 		}
 	})
 	socket.on('receiver answer', function(answer){
 		var data_len = data.length;
 			for (var i = 0; i < data_len; i++) {
+                            if(data[i] != undefined){
 				if(data[i].url_id == answer.url_id)
 				{
 					data[i].receiver_text = answer.receiver_text
 					var ini_soc = data[i].initiator_socket
 					break
- 				}  
+ 				} 
+			     }
 			}
 		ini_soc.emit('receiver answer', answer.receiver_text)
+		for (var i = 0; i < data_len; i++) {
+                        if(data[i] != undefined){  
+				if(data[i].url_id == answer.url_id)
+				{
+					delete data[i]
+					break
+ 				}
+                         }  
+	        }
 	})
 })
 

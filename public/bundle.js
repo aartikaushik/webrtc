@@ -14,7 +14,11 @@ if(lastPart != '')
 		})
 		p.on('error', function (err) { console.log('error', err) })
 		p.signal(JSON.parse(str))		
-	})	
+	})
+        var text_div = document.createElement("div")
+	text_div.className = 'share_url'
+	text_div.textContent = "Connected"
+	document.getElementById("side_pannel").appendChild(text_div)	
 }
 else
 {
@@ -26,8 +30,8 @@ else
 		socket.on('id', function(id){
 		    var text_div = document.createElement("div")
 		    text_div.className = 'share_url'
-		    text_div.innerHTML = "Share this URL with whom you want to chat : radiant-basin-26448.herokuapp.com/" + id 
-		    document.getElementById("fullpage").appendChild(text_div) 
+		    text_div.textContent = "Share this URL with whom you want to chat : radiant-basin-26448.herokuapp.com/" + id 
+		    document.getElementById("side_pannel").appendChild(text_div) 
 		})   
 	})
 	p.on('error', function (err) { console.log('error', err) })
@@ -61,7 +65,7 @@ p.on('data', function (data) {
 	span.className = 'left'
 	var new_div = document.createElement("div")
 	new_div.className = 'clear'
-	span.innerHTML = data
+	span.textContent = data
 	document.getElementById("ulist").appendChild(list)
 	document.getElementById("list").appendChild(span)
 	document.getElementById("list").appendChild(new_div)

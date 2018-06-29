@@ -43,33 +43,75 @@ else
 p.on('connect', function () {
 	console.log('CONNECT')
 	document.getElementById("send").addEventListener("click", function () {
-		p.send(document.querySelector('#message').value)		  
-		var list = document.createElement("li")
-		list.id = 'list'
-		var span = document.createElement("span")
-		span.className = 'right'
-		var new_div = document.createElement("div")
-		new_div.className = 'clear'
-		span.textContent = document.querySelector('#message').value 
-		document.getElementById("ulist").appendChild(list)
-		document.getElementById("list").appendChild(span)
-		document.getElementById("list").appendChild(new_div)
-		document.getElementById("message").value = ""
+		if((document.getElementById('message').value == null || document.getElementById('message').value == '') && document.getElementById('pic').value == '')
+		{
+			var data_and_type = {"type": 'blank' , "info": ''}	
+		}
+		else if((document.getElementById('message').value != null || document.getElementById('message').value != '') && document.getElementById('pic').value == '')
+		{
+			var data_and_type = {"type": 'text' , "info": document.querySelector('#message').value}
+		}
+		if(document.getElementById('pic').value != '')
+		{	
+			var data_and_type = {"type": 'image' , "info": document.getElementById("base64_string").value } 
+		}
+			
+		if(data_and_type.type == 'text')
+		{
+			p.send(JSON.stringify(data_and_type))		  
+			var list = document.createElement("li")
+			list.id = 'list'
+			var span = document.createElement("span")
+			span.className = 'right'
+			var new_div = document.createElement("div")
+			new_div.className = 'clear'
+			span.textContent = document.querySelector('#message').value
+			list.appendChild(span) 
+			list.appendChild(new_div) 
+			document.getElementById("ulist").appendChild(list)		
+			document.getElementById("message").value = ''
+		}
+		else if(data_and_type.type == 'image')
+		{
+			p.send(JSON.stringify(data_and_type))
+			document.getElementById("pic").value = ''	
+		}
 	})
 })
 
 p.on('data', function (data) {
-	var list = document.createElement("li")
-	list.id = 'list'
-	var span = document.createElement("span")
-	span.className = 'left'
-	var new_div = document.createElement("div")
-	new_div.className = 'clear'
-	span.textContent = data
-	document.getElementById("ulist").appendChild(list)
-	document.getElementById("list").appendChild(span)
-	document.getElementById("list").appendChild(new_div)
-	console.log('data: ' + data)
+	var obj = JSON.parse(data)
+	if(obj.type == 'text')
+	{
+		var list = document.createElement("li")
+		list.id = 'list'
+		var span = document.createElement("span")
+		span.className = 'left'
+		var new_div = document.createElement("div")
+		new_div.className = 'clear'
+		span.textContent = obj.info
+		list.appendChild(span) 
+		list.appendChild(new_div)
+		document.getElementById("ulist").appendChild(list)
+		console.log('data: ' + data)
+	}
+	else if(obj.type == 'image')
+	{
+		console.log(obj)
+		var list = document.createElement("li")
+		list.id = 'list'
+		var span = document.createElement("span")
+		span.className = 'left'
+		var image = document.createElement("img")
+		image.src = obj.info
+		var new_div = document.createElement("div")
+		new_div.className = 'clear'
+		span.appendChild(image) 
+		list.appendChild(span) 
+		list.appendChild(new_div)
+		document.getElementById("ulist").appendChild(list)
+		
+	}
 })
 
 

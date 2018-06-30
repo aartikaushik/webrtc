@@ -211,5 +211,9 @@ label
     display : block;
     padding : 10px 20px;
 }
-
+img
+{
+  height: 100px;
+  width:100px;
+}
 

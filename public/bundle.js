@@ -1,5 +1,5 @@
 var socket = io()
-var Peer = require('simple-peer')
+var Peer = SimplePeer
 var lastPart = window.location.href.split("/").pop()
 if(lastPart != '')
 {
@@ -17,7 +17,7 @@ if(lastPart != '')
 	})
         var text_div = document.createElement("div")
 	text_div.className = 'share_url'
-	text_div.textContent = "Connected"
+	text_div.id = 'share_url'
 	document.getElementById("side_pannel").appendChild(text_div)	
 }
 else
@@ -30,6 +30,7 @@ else
 		socket.on('id', function(id){
 		    var text_div = document.createElement("div")
 		    text_div.className = 'share_url'
+		    text_div.id = 'share_url'
 		    text_div.textContent = "Share this URL with whom you want to chat : radiant-basin-26448.herokuapp.com/" + id 
 		    document.getElementById("side_pannel").appendChild(text_div) 
 		})   
@@ -42,6 +43,7 @@ else
      
 p.on('connect', function () {
 	console.log('CONNECT')
+	document.getElementById("share_url").textContent = "Connected"
 	document.getElementById("send").addEventListener("click", function () {
 		if((document.getElementById('message').value == null || document.getElementById('message').value == '') && document.getElementById('pic').value == '')
 		{
@@ -50,14 +52,6 @@ p.on('connect', function () {
 		else if((document.getElementById('message').value != null || document.getElementById('message').value != '') && document.getElementById('pic').value == '')
 		{
 			var data_and_type = {"type": 'text' , "info": document.querySelector('#message').value}
-		}
-		if(document.getElementById('pic').value != '')
-		{	
-			var data_and_type = {"type": 'image' , "info": document.getElementById("base64_string").value } 
-		}
-			
-		if(data_and_type.type == 'text')
-		{
 			p.send(JSON.stringify(data_and_type))		  
 			var list = document.createElement("li")
 			list.id = 'list'
@@ -71,11 +65,26 @@ p.on('connect', function () {
 			document.getElementById("ulist").appendChild(list)		
 			document.getElementById("message").value = ''
 		}
-		else if(data_and_type.type == 'image')
-		{
+		if(document.getElementById('pic').value != '')
+		{	
+			var data_and_type = {"type": 'image' , "info": document.getElementById("base64_string").value } 
 			p.send(JSON.stringify(data_and_type))
-			document.getElementById("pic").value = ''	
+			var list = document.createElement("li")
+			list.id = 'list'
+			var span = document.createElement("span")
+			span.className = 'right'
+			var image = document.createElement("img")
+			image.src = data_and_type.info
+			var new_div = document.createElement("div")
+			new_div.className = 'clear'
+			span.appendChild(image) 
+			list.appendChild(span) 
+			list.appendChild(new_div)
+			document.getElementById("ulist").appendChild(list)		
+			document.getElementById("pic").value = ''
+	
 		}
+			
 	})
 })
 

@@ -86,7 +86,7 @@ p.on('connect', function () {
 		}
 			
 	})
-})
+//yaha lagana h })
 
 p.on('data', function (data) {
 	var obj = JSON.parse(data)

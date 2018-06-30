@@ -1,5 +1,5 @@
 var socket = io()
-var Peer = SimplePeer
+var Peer = require('simple-peer')
 var lastPart = window.location.href.split("/").pop()
 if(lastPart != '')
 {

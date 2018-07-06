@@ -48,7 +48,7 @@ else
 		socket.on('id', function(id){
 		    var link_div = document.createElement("div");
 		    link_div.id = 'share_url';
-		    link_div.textContent = "Share this URL with whom you want to chat : radiant-basin-26448.herokuapp.com/" + id ;
+		    link_div.innerHTML = "Share this URL with whom you want to chat :<br> radiant-basin-26448.herokuapp.com/" + id ;
 		    document.getElementById("side_pannel").appendChild(link_div);
 		})   
 	})
@@ -67,7 +67,7 @@ p.on('connect', function () {
 	// on click of send button this will execute
 	document.getElementById("send").addEventListener("click", function () {
 		
-		if(document.getElementById('message').value != null || document.getElementById('message').value != '')
+		if(document.getElementById('message').value != null && document.getElementById('message').value != '')
 		{
 			p.send(document.querySelector('#message').value);		  
 			var list = document.createElement("li");

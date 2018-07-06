@@ -1,8 +1,8 @@
 span.emoji {
     display: -moz-inline-box;
-   -moz-box-orient: vertical;
+    -moz-box-orient: vertical;
     display: inline-block;
-    vertical-align: baseline; 
+    vertical-align: baseline;
     *vertical-align: auto;
     *zoom: 1;
     *display: inline;
@@ -10,7 +10,7 @@ span.emoji {
     height: 1em;
     background-size: 1em;
     background-repeat: no-repeat;
-    text-indent: -9999px; 
+    text-indent: -9999px;
 }
 
 span.emoji-sizer {
@@ -54,10 +54,10 @@ img.emoji {
 
 .emoji-picker-icon {
     cursor: pointer;
-    position: relative;
-    left: -450px;
-    top: -48px;
-    font-size: 30px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 20px;
     opacity: 0.7;
     z-index: 100;
     transition: none;
@@ -89,15 +89,14 @@ img.emoji {
 }
 
 .emoji-wysiwyg-editor {
-    /* padding: 6px;
+    padding: 6px;
     padding-right: 35px;
     margin-bottom: 0px;
     min-height: 35px; /* 35 */
     height: 30px;
-    max-height: 284px; */
+    max-height: 284px;
     overflow: auto;
     line-height: 17px;
-    background-color: white;
     border: 1px solid #d2dbe3;
     border-radius: 2px;
     -webkit-box-shadow: none;

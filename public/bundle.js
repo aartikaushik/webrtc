@@ -69,7 +69,10 @@ p.on('connect', function () {
 		
 		if(document.getElementById('message').value != null && document.getElementById('message').value != '')
 		{
-			p.send(document.querySelector('#message').value);		  
+			p.send(document.querySelector('#message').value);
+			var mainDiv = document.getElementById('test');
+			var x = mainDiv.children[1];
+			x.innerHTML = '';		  
 			var list = document.createElement("li");
 			list.id = 'list';
 			var span = document.createElement("span");

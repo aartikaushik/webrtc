@@ -46,7 +46,11 @@ html,body
     box-shadow: 1px 3px 5px #2A2929;
     font-family: 'PT Sans Caption', sans-serif; 
     color: #595959;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .side_pannel > div:nth-child(2)
 {
     height: 80%;	
@@ -65,7 +69,6 @@ html,body
     background-color: #c5c5c5; 
     font-family: 'PT Sans Caption', sans-serif;
     color: #595959;
-    font-size: 110%;
     font-weight: bold;
 
 }
@@ -105,6 +108,9 @@ html,body
 {
     height: 100%;	
     width: 90%; 
+    display:flex;
+    align-items: center;
+    justify-content: center; 
 }
 .heading_and_wallpaper > div:nth-child(2)
 {

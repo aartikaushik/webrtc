@@ -65,16 +65,25 @@
                     </ul>
                 </div>
                 <div class="message-box">
-                        <div><input id="message" class="message" type="text" placeholder="Type a message" data-emojiable="true" data-emoji-input="unicode"/></div>
+                        <div id="test"><input id="message" class="message" type="text" placeholder="Type a message" data-emojiable="true" data-emoji-input="unicode"/></div>
                         <div><i id="send" class="arrow_right"></i></div>
                 </div>
             </div>
         </div>
         </center>
         <script>
-            $("#message").keyup(function(e){
-                13===e.keyCode&&$("#send").click()
-            });
+            
+            window.onload= function() {
+                var mainDiv = document.getElementById('test');
+                var x = mainDiv.children[1];
+                x.id="hello";
+                $("#hello").on('keypress',function(e){
+                   if(e.which == 13)
+                   {
+                     document.getElementById("send").click();
+                   }
+                });
+            }
         </script> 
         <script>
             var images = [

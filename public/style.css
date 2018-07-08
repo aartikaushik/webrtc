@@ -50,7 +50,6 @@ html,body
     align-items: center;
     justify-content: center;
 }
-
 .side_pannel > div:nth-child(2)
 {
     height: 80%;	
@@ -120,7 +119,8 @@ html,body
     align-items: center;
     justify-content: center;  
 }
-.btn{
+.btn
+{
     display: inline-block;
     text-decoration: none;
     background: #87befd;
@@ -133,11 +133,11 @@ html,body
     cursor: pointer;
     transition: .4s;
     outline:none;
-  }
-  
-  .btn:hover{
-      background: #668ad8;
-  }
+}
+.btn:hover
+{
+    background: #668ad8;
+}
 .message-box
 {
     display: flex;
@@ -238,8 +238,8 @@ h3
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
 }
-
-.force-overflow {
+.force-overflow 
+{
     min-height: 450px;
 }
 #ulist
